@@ -2,9 +2,9 @@ streamlit
 pillow
 numpy
 tensorflow
-langchain
+langchain>=0.3.0
+langchain-community>=0.3.0
 langchain-groq
-langchain-community
 langdetect
 deep-translator
 python-dotenv

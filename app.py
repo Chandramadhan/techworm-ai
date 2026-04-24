@@ -7,11 +7,7 @@ import warnings
 from PIL import Image
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image as keras_image
-from langchain.memory import ConversationBufferMemory
-from langchain.agents import initialize_agent, AgentType
 from langchain_groq import ChatGroq
-from langchain_community.tools import WikipediaQueryRun, ArxivQueryRun, DuckDuckGoSearchRun
-from langchain_community.utilities import WikipediaAPIWrapper, ArxivAPIWrapper, DuckDuckGoSearchAPIWrapper
 from langdetect import detect
 from deep_translator import GoogleTranslator
 from dotenv import load_dotenv, find_dotenv
@@ -22,13 +18,6 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", message=".*PydanticDeprecatedSince20.*")
 
 load_dotenv('.env', override=True)
-
-# LangChain tools
-memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True, output_key="output")
-wiki = WikipediaQueryRun(api_wrapper=WikipediaAPIWrapper(top_k_results=1, doc_content_chars_max=200))
-arxiv = ArxivQueryRun(api_wrapper=ArxivAPIWrapper(top_k_results=1, doc_content_chars_max=200))
-duckduckgo = DuckDuckGoSearchRun(api_wrapper=DuckDuckGoSearchAPIWrapper(region="in-en", time="y", max_results=2))
-tools = [wiki, arxiv, duckduckgo]
 
 # Load LLM
 def load_llm():
@@ -86,21 +75,18 @@ inv_label_map = {v: k for k, v in label_map.items()}
 
 def predict_disease(img):
     try:
-        # 1. Image Preprocessing
+        # 1. Match ACTUAL model input shape (224x224)
         img_size = 224
         img_resized = img.resize((img_size, img_size))
         img_array = keras_image.img_to_array(img_resized)
         
         # 2. Advanced Validation (Color & Texture)
-        # Check if the image has enough 'green/brown' variation typical of leaves
         hsv_img = img_resized.convert('HSV')
         h, s, v = hsv_img.split()
         if np.mean(s) < 30 or np.std(img_array) < 25:
             return "❌ Specimen Rejected: Image lacks the color depth or texture of a leaf. Please use a clearer, well-lit photo."
 
-        # 3. Test-Time Augmentation (TTA) - Fixes Overconfidence
-        # We run 3 predictions (Original, Flipped, Rotated) and average them.
-        # If the model is 'guessing', these won't match, and confidence will drop.
+        # 3. Test-Time Augmentation (TTA)
         img_orig = np.expand_dims(img_array, axis=0).astype('float32')
         img_flip = np.expand_dims(np.fliplr(img_array), axis=0).astype('float32')
         img_rot = np.expand_dims(np.rot90(img_array), axis=0).astype('float32')
@@ -109,16 +95,14 @@ def predict_disease(img):
         for i in [img_orig, img_flip, img_rot]:
             preds.append(model.predict(i, verbose=0)[0])
         
-        # Average the predictions
         avg_pred = np.mean(preds, axis=0)
         confidence = float(np.max(avg_pred))
         class_index = int(np.argmax(avg_pred))
         result = inv_label_map.get(class_index, 'Unknown')
         
-        # 4. Final Result with Honesty Logic
-        if confidence > 0.98: confidence = 0.975 # Don't allow fake 100%
+        if confidence > 0.98: confidence = 0.975
         
-        if confidence < 0.60: # High bar for accuracy
+        if confidence < 0.60:
             return f"🔬 Uncertain Result ({confidence*100:.1f}%): Possibly {result}. Suggest consulting the AI Expert for a manual symptoms check."
             
         return f"Prediction: {result} ({confidence*100:.1f}%)"
@@ -178,7 +162,6 @@ def main():
             color: white !important;
         }
 
-        /* Glass Cards */
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -193,8 +176,6 @@ def main():
         <p class='sub-title'>SMART AGRICULTURE & PLANT INTELLIGENCE</p>
     """, unsafe_allow_html=True)
 
-    if "chat_memory" not in st.session_state:
-        st.session_state.chat_memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
@@ -215,10 +196,8 @@ def main():
             with st.spinner("🔬 Analyzing specimen..."):
                 result = predict_disease(img)
                 st.success(f"#### {result}")
-                
-                # Store prediction for the chatbot to see
                 st.session_state.last_scan = result
-                st.info("🤖 **AI Note:** I've shared this result with the expert on the right. You can now ask: 'Tell me more about this result' or 'Is this prediction correct?'")
+                st.info("🤖 **AI Note:** Shared with expert. Ask: 'Is this prediction correct?'")
         st.markdown("</div>", unsafe_allow_html=True)
 
     with col2:
@@ -226,7 +205,6 @@ def main():
         st.markdown("### 💬 Agriculture Expert")
         
         if st.button("Clear History"):
-            st.session_state.chat_memory.clear()
             st.session_state.messages = []
             if 'last_scan' in st.session_state: del st.session_state.last_scan
             st.rerun()
@@ -248,20 +226,16 @@ def main():
                 if lang != "en":
                     st.info(f"**Translation:** {translated}")
 
-                # Context-aware prompting for accuracy
-                scan_context = f"\n(Note: The user just scanned a leaf and the model predicted: {st.session_state.get('last_scan', 'No scan yet')})"
+                scan_context = f"\n(Note: User just scanned a leaf and model predicted: {st.session_state.get('last_scan', 'No scan yet')})"
                 
                 llm = load_llm()
                 final_prompt = f"""
-You are a highly accurate Senior Agronomist and Plant Pathologist.
-Provide scientific, precise, and actionable farming advice.
-If a scan result is provided, evaluate if it makes sense based on common plant pathology.
-
+You are an accurate Senior Agronomist. Provide precise farming advice.
 User's Question: {translated}
 {scan_context}
 """
                 if translated.lower().strip() in ["hi", "hello", "hey", "howdy"]:
-                    output = "Hello! I am your AI Agriculture Expert. How can I help you with your farming or plant health questions today?"
+                    output = "Hello! I am your AI Agriculture Expert. How can I help you today?"
                 else:
                     with st.spinner("💡 Thinking..."):
                         response = llm.invoke(final_prompt)

@@ -1,45 +1,346 @@
-PS D:\Project Work\main project\bot\Final Project> git checkout -b main
-Switched to a new branch 'main'
-PS D:\Project Work\main project\bot\Final Project> git push -u origin main  
-Enumerating objects: 47, done.
-Counting objects: 100% (47/47), done.
-Delta compression using up to 8 threads
-Compressing objects: 100% (41/41), done.
-Writing objects: 100% (47/47), 1.80 MiB | 1.32 MiB/s, done.
-Total 47 (delta 19), reused 0 (delta 0), pack-reused 0
-remote: Resolving deltas: 100% (19/19), done.                          
-remote: error: GH013: Repository rule violations found for refs/heads/main.                                                                   
-remote: 
-remote: - GITHUB PUSH PROTECTION                                       
-remote:   —————————————————————————————————————————                    
-remote:     Resolve the following violations before pushing again      
-remote: 
-remote:     - Push cannot contain secrets                              
-remote: 
-remote:                                                                
-remote:      (?) Learn how to resolve a blocked push                   
-remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push                      
-remote:                                                                
-remote:                                                                
-remote:       —— Groq API Key ——————————————————————————————————————   
-remote:        locations:                                              
-remote:          - commit: 659bb533b719e3ef550832938d00bc1e3bf767a4    
-remote:            path: streamlit.txt:1                               
-remote:                                                                
-remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.                                              
-remote:        https://github.com/Chandramadhan/techworm-ai/security/secret-scanning/unblock-secret/3CoKYxGiHmvDsaklD1idAlDg9op               
-remote:                                                                
-remote:                                                                
-remote:       —— Groq API Key ——————————————————————————————————————   
-remote:        locations:                                              
-remote:          - commit: 493993815084a18ce6add8afcb0c156fd63707e3    
-remote:            path: streamlit.txt:1                               
-remote:                                                                
-remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.                                              
-remote:        https://github.com/Chandramadhan/techworm-ai/security/secret-scanning/unblock-secret/3CoKYtUSRIf75m7Qj8B4qqNNqfj               
-remote:                                                                
-remote: 
-remote: 
-To https://github.com/Chandramadhan/techworm-ai.git
- ! [remote rejected] main -> main (push declined due to repository rule violations)
-error: failed to push some refs to 'https://github.com/Chandramadhan/techworm-ai.git'
+
+
+[     UTC     ] Logs for techworm-ai.streamlit.app/
+
+────────────────────────────────────────────────────────────────────────────────────────
+
+[16:38:33] 🖥 Provisioning machine...
+
+[16:38:33] 🎛 Preparing system...
+
+[16:38:33] ⛓ Spinning up manager process...
+
+[16:38:30] 🚀 Starting up repository: 'techworm-ai', branch: 'main', main module: 'app.py'
+
+[16:38:30] 🐙 Cloning repository...
+
+[16:38:31] 🐙 Cloning into '/mount/src/techworm-ai'...
+
+[16:38:31] 🐙 Cloned repository!
+
+[16:38:31] 🐙 Pulling code changes from Github...
+
+[16:38:31] 📦 Processing dependencies...
+
+──────────────────────────────────────── uv ───────────────────────────────────────────
+
+Using uv pip install.
+
+Using Python 3.11.15 environment at /home/adminuser/venv
+
+Resolved 120 packages in 2.21s
+
+Prepared 119 packages in 17.51s
+
+Installed 119 packages in 1.06s
+
+ + absl-py==2.4.0
+
+ + aiohappyeyeballs==2.6.1
+
+ + aiohttp==3.13.5
+
+ + aiosignal==1.4.0
+
+ + altair==[2026-04-24 16:38:52.481035] 6.1.0
+
+ + annotated-types==0.7.0
+
+ + anyio==4.13.0
+
+ +[2026-04-24 16:38:52.481282]  arxiv==3.0.0
+
+ + astunparse==1.6.3
+
+ + attrs==26.1.0
+
+ + beautifulsoup4==4.14.3
+
+ + blinker==1.9.0
+
+ + cachetools==7.0.6
+
+ + [2026-04-24 16:38:52.481471] certifi==2026.4.22
+
+ + charset-normalizer==3.4.7
+
+ + click==8.3.3
+
+ + dataclasses-json==[2026-04-24 16:38:52.481615] 0.6.7
+
+ + deep-translator==1.11.4
+
+ + [2026-04-24 16:38:52.481763] distro==1.9.0
+
+ + duckduckgo-search==8.1.1
+
+ + feedparser==6.0.12[2026-04-24 16:38:52.481918] 
+
+ + filelock==3.29.0
+
+ + flatbuffers==25.12.19
+
+ + frozenlist==1.8.0
+
+ [2026-04-24 16:38:52.482157] + gast==0.7.0
+
+ + gdown==6.0.0
+
+ + gitdb==4.0.12
+
+ [2026-04-24 16:38:52.482323] + gitpython==3.1.47
+
+ + google-pasta==0.2.0
+
+ + greenlet==3.4.0
+
+ + groq[2026-04-24 16:38:52.482512] ==0.37.1
+
+ + grpcio==1.80.0
+
+ [2026-04-24 16:38:52.482671] + h11==0.16.0
+
+ + h5py==3.14.0
+
+ + httpcore[2026-04-24 16:38:52.482831] ==1.0.9
+
+ + httpx==0.28.1
+
+ + httpx-sse==0.4.3[2026-04-24 16:38:52.482997] 
+
+ + idna==3.13
+
+ +[2026-04-24 16:38:52.483176]  jinja2==3.1.6
+
+ + jsonpatch==1.33
+
+ + jsonpointer==[2026-04-24 16:38:52.483343] 3.1.1
+
+ + jsonschema==4.26.0
+
+ + jsonschema-specifications==2025.9.1[2026-04-24 16:38:52.483516] 
+
+ + keras==3.14.0
+
+ + langchain==1.2.15[2026-04-24 16:38:52.483760] 
+
+ + langchain-classic==1.0.4
+
+ + langchain-community==[2026-04-24 16:38:52.484073] 0.4.1
+
+ + langchain-core==1.3.2
+
+ + [2026-04-24 16:38:52.484256] langchain-groq==1.1.2
+
+ + langchain-protocol==0.0.11
+
+ + langchain-text-splitters[2026-04-24 16:38:52.484426] ==1.1.2
+
+ + langdetect==1.0.9
+
+ + langgraph==[2026-04-24 16:38:52.484527] 1.1.9
+
+ + langgraph-checkpoint==4.0.2
+
+ [2026-04-24 16:38:52.484724] + langgraph-prebuilt==1.0.10
+
+ + langgraph-sdk==0.3.13
+
+ + langsmith==0.7.35
+
+ + libclang[2026-04-24 16:38:52.484896] ==18.1.1
+
+ + lxml==6.1.0
+
+ + markdown-it-py==4.0.0
+
+ + [2026-04-24 16:38:52.485072] markupsafe==3.0.3
+
+ + marshmallow==3.26.2[2026-04-24 16:38:52.485162] 
+
+ + mdurl==0.1.2
+
+ + ml-dtypes==0.5.4[2026-04-24 16:38:52.485233] 
+
+ + multidict==6.7.1
+
+ + mypy-extensions==1.1.0
+
+ + namex==0.1.0
+
+ [2026-04-24 16:38:52.485352] + narwhals==2.20.0
+
+ + numpy==2.4.4
+
+ + opt-einsum==3.4.0
+
+ + optree==[2026-04-24 16:38:52.485416] 0.19.0
+
+ + orjson==3.11.8
+
+ + ormsgpack==1.12.2
+
+ + packaging==26.1
+
+ + [2026-04-24 16:38:52.485588] pandas==3.0.2
+
+ + pillow==12.2.0
+
+ [2026-04-24 16:38:52.485683] + primp==1.2.3
+
+ + propcache==0.4.1
+
+ + protobuf==7.34.1
+
+ + [2026-04-24 16:38:52.485890] pyarrow==24.0.0
+
+ + pydantic==2.13.3[2026-04-24 16:38:52.485995] 
+
+ + pydantic-core==2.46.3
+
+ + pydantic-settings==2.14.0[2026-04-24 16:38:52.486108] 
+
+ + pydeck==0.9.2
+
+ + [2026-04-24 16:38:52.486213] pygments==2.20.0
+
+ + pysocks==1.7.1
+
+ + [2026-04-24 16:38:52.486277] python-dateutil==2.9.0.post0
+
+ + python-dotenv==1.2.2
+
+ + pyyaml==[2026-04-24 16:38:52.486340] 6.0.3
+
+ + referencing==0.37.0
+
+ + requests==2.33.1
+
+ + requests-toolbelt==1.0.0[2026-04-24 16:38:52.486401] 
+
+ + rich==15.0.0
+
+ + rpds-py==0.30.0
+
+ + [2026-04-24 16:38:52.486466] sgmllib3k==1.0.0
+
+ + six==1.17.0[2026-04-24 16:38:52.486574] 
+
+ + smmap==5.0.3
+
+ + sniffio==1.3.1[2026-04-24 16:38:52.486687] 
+
+ + soupsieve==2.8.3
+
+ + sqlalchemy==2.0.49
+
+ + streamlit==1.56.0[2026-04-24 16:38:52.486999] 
+
+ + tenacity==9.1.4
+
+ + tensorflow==2.21.0
+
+ + [2026-04-24 16:38:52.487181] termcolor==3.3.0
+
+ + toml==0.10.2
+
+ + tornado==6.5.5
+
+ + tqdm==[2026-04-24 16:38:52.487325] 4.67.3
+
+ + typing-extensions==4.15.0
+
+ + typing-inspect==0.9.0
+
+ + typing-inspection==0.4.2
+
+ +[2026-04-24 16:38:52.487434]  urllib3==2.6.3
+
+ + uuid-utils==0.14.1
+
+ + watchdog==6.0.0
+
+ + wheel==0.47.0[2026-04-24 16:38:52.487552] 
+
+ + wikipedia==1.4.0
+
+ + wrapt==2.1.2
+
+ + xxhash==3.6.0
+
+ + yarl==1.23.0[2026-04-24 16:38:52.487890] 
+
+ + zstandard==0.25.0
+
+Checking if Streamlit is installed
+
+Found Streamlit version 1.56.0 in the environment
+
+Installing rich for an improved exception logging
+
+Using uv pip install.
+
+Using Python 3.11.15 environment at /home/adminuser/venv
+
+Audited 1 package in 5ms
+
+────────────────────────────────────────────────────────────────────────────────────────
+
+[16:38:54] 🐍 Python dependencies were installed from /mount/src/techworm-ai/requirements.txt using uv.
+
+Check if streamlit is installed
+
+Streamlit is already installed
+
+[16:38:55] 📦 Processed dependencies!
+
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+
+I0000 00:00:1777048744.195503     204 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+
+I0000 00:00:1777048744.267174     204 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+
+I0000 00:00:1777048749.636784     204 cudart_stub.cc:31] Could not find cuda drivers on your machine, GPU will not be used.
+
+────────────────────── Traceback (most recent call last) ───────────────────────
+
+  /home/adminuser/venv/lib/python3.11/site-packages/streamlit/runtime/scriptru  
+
+  nner/exec_code.py:129 in exec_func_with_error_handling                        
+
+                                                                                
+
+  /home/adminuser/venv/lib/python3.11/site-packages/streamlit/runtime/scriptru  
+
+  nner/script_runner.py:689 in code_to_exec                                     
+
+                                                                                
+
+  /mount/src/techworm-ai/app.py:10 in <module>                                  
+
+                                                                                
+
+      7 from PIL import Image                                                   
+
+      8 from tensorflow.keras.models import load_model                          
+
+      9 from tensorflow.keras.preprocessing import image as keras_image         
+
+  ❱  10 from langchain.memory import ConversationBufferMemory                   
+
+     11 from langchain.agents import initialize_agent, AgentType                
+
+     12 from langchain_groq import ChatGroq                                     
+
+     13 from langchain_community.tools import WikipediaQueryRun, ArxivQueryRun  
+
+────────────────────────────────────────────────────────────────────────────────
+
+ModuleNotFoundError: No module named 'langchain.memory'
+
+main
+chandramadhan/techworm-ai/main/app.py
