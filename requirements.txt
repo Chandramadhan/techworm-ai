@@ -1,0 +1,14 @@
+streamlit
+pillow
+numpy
+tensorflow
+langchain
+langchain-groq
+langchain-community
+langdetect
+deep-translator
+python-dotenv
+wikipedia
+arxiv
+duckduckgo-search
+gdown

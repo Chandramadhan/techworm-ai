@@ -1,0 +1,45 @@
+PS D:\Project Work\main project\bot\Final Project> git checkout -b main
+Switched to a new branch 'main'
+PS D:\Project Work\main project\bot\Final Project> git push -u origin main  
+Enumerating objects: 47, done.
+Counting objects: 100% (47/47), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (41/41), done.
+Writing objects: 100% (47/47), 1.80 MiB | 1.32 MiB/s, done.
+Total 47 (delta 19), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (19/19), done.                          
+remote: error: GH013: Repository rule violations found for refs/heads/main.                                                                   
+remote: 
+remote: - GITHUB PUSH PROTECTION                                       
+remote:   —————————————————————————————————————————                    
+remote:     Resolve the following violations before pushing again      
+remote: 
+remote:     - Push cannot contain secrets                              
+remote: 
+remote:                                                                
+remote:      (?) Learn how to resolve a blocked push                   
+remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push                      
+remote:                                                                
+remote:                                                                
+remote:       —— Groq API Key ——————————————————————————————————————   
+remote:        locations:                                              
+remote:          - commit: 659bb533b719e3ef550832938d00bc1e3bf767a4    
+remote:            path: streamlit.txt:1                               
+remote:                                                                
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.                                              
+remote:        https://github.com/Chandramadhan/techworm-ai/security/secret-scanning/unblock-secret/3CoKYxGiHmvDsaklD1idAlDg9op               
+remote:                                                                
+remote:                                                                
+remote:       —— Groq API Key ——————————————————————————————————————   
+remote:        locations:                                              
+remote:          - commit: 493993815084a18ce6add8afcb0c156fd63707e3    
+remote:            path: streamlit.txt:1                               
+remote:                                                                
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.                                              
+remote:        https://github.com/Chandramadhan/techworm-ai/security/secret-scanning/unblock-secret/3CoKYtUSRIf75m7Qj8B4qqNNqfj               
+remote:                                                                
+remote: 
+remote: 
+To https://github.com/Chandramadhan/techworm-ai.git
+ ! [remote rejected] main -> main (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/Chandramadhan/techworm-ai.git'
